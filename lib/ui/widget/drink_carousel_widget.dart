@@ -49,80 +49,96 @@ class _DrinkCarouselWidgetState extends State<DrinkCarouselWidget>
             ScopedModelDescendant<DrinkListModel>(
               rebuildOnChange: false,
               builder: (context, _, model) {
-                return TabBarView(
-                  controller: _tabController,
-                  children: mainTypes.map((drinkType) {
-                    return GestureDetector(
-                      onTap: () {
-                        var type;
-                        switch (drinkType.title) {
-                          case 'coffee':
-                            type = coffeeTypes;
-                            break;
-                          case 'tea':
-                            type = teaTypes;
-                            break;
-                          case 'juice':
-                            type = juiceTypes;
-                            break;
-                          case 'smoothie':
-                            type = smoothieTypes;
-                            break;
-                          default:
-                            throw '${drinkType.title} error';
-                        }
-                        _carouselTimer.cancel();
-                        model.updateDrinkList(type);
-                      },
-                      child: DrinkCardWidget(
-                        drinkType: drinkType,
-                      ),
-                    );
-                  }).toList(),
-                );
+                return _tabBar(model);
               },
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.all(6.0),
-                child: TabPageSelector(
-                  controller: _tabController,
-                  color: Colors.white,
-                  indicatorSize: 15.0,
-                  selectedColor: Colors.blue[900],
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: IconButton(
-                onPressed: () {
-                  _changeImage(delta: -1, userInput: true);
-                },
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                  size: 20.0,
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: IconButton(
-                onPressed: () {
-                  _changeImage(delta: 1, userInput: true);
-                },
-                icon: Icon(
-                  Icons.arrow_forward,
-                  color: Colors.white,
-                  size: 20.0,
-                ),
-              ),
-            ),
+            _tabPageSelector(),
+            _backIcon(),
+            _forwardIcon(),
           ],
         ),
       ),
+    );
+  }
+
+  _forwardIcon() {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: IconButton(
+        onPressed: () {
+          _changeImage(delta: 1, userInput: true);
+        },
+        icon: Icon(
+          Icons.arrow_forward,
+          color: Colors.white,
+          size: 20.0,
+        ),
+      ),
+    );
+  }
+
+  _backIcon() {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: IconButton(
+        onPressed: () {
+          _changeImage(delta: -1, userInput: true);
+        },
+        icon: Icon(
+          Icons.arrow_back,
+          color: Colors.white,
+          size: 20.0,
+        ),
+      ),
+    );
+  }
+
+  _tabPageSelector() {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Padding(
+        padding: const EdgeInsets.all(6.0),
+        child: TabPageSelector(
+          controller: _tabController,
+          color: Colors.white,
+          indicatorSize: 15.0,
+          selectedColor: Colors.blue[900],
+        ),
+      ),
+    );
+  }
+
+  TabBarView _tabBar(DrinkListModel model) {
+    return TabBarView(
+      controller: _tabController,
+      children: mainTypes.map((drinkType) {
+        return GestureDetector(
+          onTap: () {
+            var type;
+            switch (drinkType.title) {
+              case 'coffee':
+                type = coffeeTypes;
+                break;
+              case 'tea':
+                type = teaTypes;
+                break;
+              case 'juice':
+                type = juiceTypes;
+                break;
+              case 'smoothie':
+                type = smoothieTypes;
+                break;
+              default:
+                throw '${drinkType.title} error';
+            }
+            _carouselTimer.cancel();
+            model.updateDrinkList(type);
+          },
+          child: DrinkCardWidget(
+            drinkType: drinkType,
+          ),
+        );
+      }).toList(),
     );
   }
 

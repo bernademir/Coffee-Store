@@ -14,10 +14,7 @@ class StoreView extends StatelessWidget {
       model: DrinkListModel(),
       child: Scaffold(
         backgroundColor: Colors.blue[900],
-        appBar: AppBar(
-          title: Text(title),
-          backgroundColor: Colors.blue[900],
-        ),
+        appBar: _appBar(),
         body: Column(
           children: [
             DrinkCarouselWidget(),
@@ -25,6 +22,13 @@ class StoreView extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  _appBar() {
+    return AppBar(
+      title: Text(title),
+      backgroundColor: Colors.blue[900],
     );
   }
 }

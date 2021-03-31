@@ -50,42 +50,52 @@ class DrinkCardWidget extends StatelessWidget {
       child: Center(
         child: Stack(
           children: [
-            FadeInImage(
-              placeholder: MemoryImage(kTransparentImage),
-              image: AssetImage(
-                drinkType.image,
-              ),
-              height: double.infinity,
-              width: double.infinity,
-              fit: BoxFit.cover,
-              fadeInDuration: Duration(
-                milliseconds: 500,
-              ),
-              fadeInCurve: Curves.easeIn,
-            ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  padding: EdgeInsets.all(4.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.blue[900].withOpacity(0.7),
-                  ),
-                  child: Text(
-                    drinkType.title,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24.0),
-                  ),
-                ),
-              ),
-            ),
+            _fadeInImage(),
+            _cardTextDesign(),
           ],
         ),
       ),
+    );
+  }
+
+  _cardTextDesign() {
+    return Align(
+      alignment: Alignment.topCenter,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          padding: EdgeInsets.all(4.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: Colors.blue[900].withOpacity(0.7),
+          ),
+          child: _cardTitle(),
+        ),
+      ),
+    );
+  }
+
+  _cardTitle() {
+    return Text(
+      drinkType.title,
+      style: TextStyle(
+          color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24.0),
+    );
+  }
+
+  _fadeInImage() {
+    return FadeInImage(
+      placeholder: MemoryImage(kTransparentImage),
+      image: AssetImage(
+        drinkType.image,
+      ),
+      height: double.infinity,
+      width: double.infinity,
+      fit: BoxFit.cover,
+      fadeInDuration: Duration(
+        milliseconds: 500,
+      ),
+      fadeInCurve: Curves.easeIn,
     );
   }
 }
