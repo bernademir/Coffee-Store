@@ -50,12 +50,6 @@ class DrinkCardWidget extends StatelessWidget {
       child: Center(
         child: Stack(
           children: [
-            // Image.asset(
-            //   drinkType.image,
-            //   height: double.infinity,
-            //   width: double.infinity,
-            //   fit: BoxFit.cover,
-            // ),
             FadeInImage(
               placeholder: MemoryImage(kTransparentImage),
               image: AssetImage(
@@ -73,12 +67,19 @@ class DrinkCardWidget extends StatelessWidget {
               alignment: Alignment.topCenter,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  drinkType.title,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24.0),
+                child: Container(
+                  padding: EdgeInsets.all(4.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.blue[900].withOpacity(0.7),
+                  ),
+                  child: Text(
+                    drinkType.title,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24.0),
+                  ),
                 ),
               ),
             ),

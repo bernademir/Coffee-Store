@@ -7,9 +7,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Coffee Store',
       home: StoreView(
-        title: "Coffee Store",
+        title: "Coffee Store Menu",
       ),
     );
   }
